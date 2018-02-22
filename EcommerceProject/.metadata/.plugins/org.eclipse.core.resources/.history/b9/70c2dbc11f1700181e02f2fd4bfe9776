@@ -1,0 +1,33 @@
+package com.demo.daoimpl;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.demo.dao.CategoryDAO;
+import com.demo.model.Category;
+@Repository
+public class CategoryDAOImpl implements CategoryDAO{
+	@Autowired
+	SessionFactory sessionFactory;
+
+	public void createCategory(Category category) {
+		sessionFactory.getCurrentSession().saveOrUpdate(category);
+		
+	}
+
+	public String getCategories() {
+		
+		return null;
+	}
+
+	public List<Category> list() {
+		Session session=this.sessionFactory.getCurrentSession();
+		List<Category> getCategory = session.createQuery("from Category").list();
+		return getCategory;
+	}
+
+}
